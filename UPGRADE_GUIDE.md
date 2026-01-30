@@ -21,19 +21,32 @@ TestTokenV2 adds the following new features:
 
 ## Configuration
 
-### Option 1: Use .env (Recommended)
+### Configuration Options
 
 Add to your `.env` file:
 
 ```env
-# V2 Token Configuration
+# Option 1: Update both name and symbol
 TOKEN_NAME_V2=MyNewToken
 TOKEN_SYMBOL_V2=MNT
+
+# Option 2: Update only symbol (keep current name)
+# TOKEN_NAME_V2=              # Leave empty or don't set
+TOKEN_SYMBOL_V2=NEWMTK
+
+# Option 3: Update only name (keep current symbol)
+TOKEN_NAME_V2=UpdatedToken
+# TOKEN_SYMBOL_V2=            # Leave empty or don't set
+
+# Option 4: Keep both unchanged (upgrade logic only)
+# TOKEN_NAME_V2=              # Don't set or leave empty
+# TOKEN_SYMBOL_V2=            # Don't set or leave empty
 ```
 
-### Option 2: Use existing .env values
-
-The script will use `TOKEN_NAME` and `TOKEN_SYMBOL` from `.env` if V2 values are not set.
+**How it works:**
+- If `TOKEN_NAME_V2` is set → Updates to new name
+- If `TOKEN_NAME_V2` is empty/not set → Keeps current name from deployment
+- Same logic applies to `TOKEN_SYMBOL_V2`
 
 ## Deployment Info Structure
 

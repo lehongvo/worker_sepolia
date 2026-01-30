@@ -53,6 +53,9 @@ async function main() {
   console.log("Total Supply:", hre.ethers.formatEther(totalSupply), symbol);
   console.log("Deployer Balance:", hre.ethers.formatEther(balance), symbol);
 
+  // Get network name
+  const network = hre.network.name;
+
   // Save deployment info to JSON file
   const fs = require("fs");
   const path = require("path");
@@ -80,7 +83,6 @@ async function main() {
   console.log(`\n💾 Deployment info saved to: deployments/${network}.json`);
 
   // Verify contracts on Etherscan (only if not on localhost/hardhat network)
-  const network = hre.network.name;
   if (network !== "hardhat" && network !== "localhost") {
     console.log("\n=== Verifying Contracts on Etherscan ===");
     console.log("Waiting for block confirmations...");

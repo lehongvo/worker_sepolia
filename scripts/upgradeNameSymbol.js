@@ -49,12 +49,17 @@ async function main() {
   }
 
   // Get new name and symbol from .env
-  const newName = process.env.TOKEN_NAME_V2 || process.env.TOKEN_NAME || deploymentInfo.tokenName;
-  const newSymbol = process.env.TOKEN_SYMBOL_V2 || process.env.TOKEN_SYMBOL || deploymentInfo.tokenSymbol;
+  // Priority: V2 env var > keep old value from deployment
+  const newName = process.env.TOKEN_NAME_V2 || deploymentInfo.tokenName;
+  const newSymbol = process.env.TOKEN_SYMBOL_V2 || deploymentInfo.tokenSymbol;
 
-  console.log("\n=== New Token Info ===");
+  console.log("\n=== Token Info Update ===");
+  console.log("Current Name:", deploymentInfo.tokenName);
   console.log("New Name:", newName);
+  console.log(newName !== deploymentInfo.tokenName ? "  ✏️  Will be updated" : "  ✓ No change");
+  console.log("\nCurrent Symbol:", deploymentInfo.tokenSymbol);
   console.log("New Symbol:", newSymbol);
+  console.log(newSymbol !== deploymentInfo.tokenSymbol ? "  ✏️  Will be updated" : "  ✓ No change");
 
   // Upgrade to V2
   console.log("\n=== Upgrading to TestTokenV2 ===");
