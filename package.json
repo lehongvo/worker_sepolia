@@ -15,7 +15,8 @@
     "update:links": "node scripts/openUpdateLinks.js",
     "deploy:nft:local": "hardhat run scripts/deployNft.js",
     "deploy:nft:sepolia": "hardhat run scripts/deployNft.js --network sepolia",
-    "upgrade:nft": "hardhat run scripts/upgradeNft.js --network sepolia"
+    "upgrade:nft": "hardhat run scripts/upgradeNft.js --network sepolia",
+    "test:nft:upgrade": "hardhat run scripts/testNftUpgrade.js"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
