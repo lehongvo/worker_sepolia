@@ -41,9 +41,21 @@ ETHERSCAN_API_KEY=your_etherscan_api_key
 ### How to get the required information:
 
 1. **Private Key**: Export from MetaMask (Settings > Security & Privacy > Show Private Key)
-2. **Sepolia RPC URL**: 
-   - Create a free app at [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/)
-   - Copy the Sepolia RPC endpoint
+
+2. **Sepolia RPC URL** - Choose one:
+   - **With API Key (Recommended)**:
+     - [Alchemy](https://www.alchemy.com/) - `https://eth-sepolia.g.alchemy.com/v2/YOUR_KEY`
+     - [Infura](https://infura.io/) - `https://sepolia.infura.io/v3/YOUR_KEY`
+   
+   - **Free Public RPCs (No API key)**:
+     - `https://ethereum-sepolia.rpc.subquery.network/public`
+     - `https://eth-sepolia.api.onfinality.io/public`
+     - `https://api.zan.top/eth-sepolia`
+     - `https://ethereum-sepolia.gateway.tatum.io`
+     - `https://sepolia.gateway.tenderly.co`
+   
+   📖 See [RPC_PROVIDERS.md](./RPC_PROVIDERS.md) for details
+
 3. **Etherscan API Key**: Sign up for free at [Etherscan](https://etherscan.io/myapikey)
 
 ## Basic Commands
