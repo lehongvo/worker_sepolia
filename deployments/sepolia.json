@@ -1,12 +1,14 @@
 {
   "network": "sepolia",
   "proxyAddress": "0x2A1430BE8b1D1e6510BC67eBaEf758a2c0fc7E7a",
-  "implementationAddress": "0x5965AF40678Ed0a8e9B7103a8AaB0D496f08Fd55",
+  "implementationAddress": "0xb26aBEd1E0b71E1e0D406339cFF290e9040eAc1E",
   "adminAddress": "0x0E71e5C8eF42076A6E13190357E6aFcD8C802fB2",
   "deployer": "0x0ef303a549722d0DDe364c430512E10C907cD510",
-  "tokenName": "testToken",
-  "tokenSymbol": "MTK",
+  "tokenName": "LEVO",
+  "tokenSymbol": "VL",
   "initialSupply": "1000000000.0",
   "deployedAt": "2026-01-30T09:10:04.453Z",
-  "version": "1.0.0"
+  "version": "2.0.0",
+  "upgradedAt": "2026-01-30T09:19:52.139Z",
+  "upgradedBy": "0x0ef303a549722d0DDe364c430512E10C907cD510"
 }

@@ -268,6 +268,45 @@ npx hardhat verify --network sepolia PROXY_ADDRESS
 - Wait a few more blocks and try manual verification
 - Make sure ETHERSCAN_API_KEY is correct
 
+## Updating Token Info on Etherscan
+
+After upgrading to V2 and updating token name/symbol on-chain, the Etherscan UI still shows cached metadata from the initial deployment.
+
+### Quick Reference
+
+```bash
+# Display all links and info needed to update Etherscan
+yarn update:links
+
+# Verify current on-chain data (shows actual blockchain values)
+yarn verify:token
+```
+
+### Current Status
+
+- ✅ **On-Chain (Blockchain):** LEVO (VL) - Version 2.0.0
+- ⏳ **Etherscan UI:** testToken (MTK) - Needs manual update
+
+### Update Process
+
+**Step 1: Verify Address Ownership (One-time)**
+1. Login to https://sepolia.etherscan.io/
+2. Go to "Verified Address" (hover username → dropdown)
+3. Click "Add Address" and sign with MetaMask
+
+**Step 2: Submit Update Request**
+1. After verifying ownership, click "Update Token Information"
+2. Fill form with new name (LEVO) and symbol (VL)
+3. Submit for Etherscan team review (1-3 business days)
+
+**For detailed step-by-step guide with screenshots:**
+- See [SEPOLIA_TOKEN_UPDATE.md](./SEPOLIA_TOKEN_UPDATE.md) - Testnet-specific guide
+- See [ETHERSCAN_UPDATE_GUIDE.md](./ETHERSCAN_UPDATE_GUIDE.md) - General guide
+
+### Why This Happens
+
+Etherscan caches token metadata when a contract is first indexed. This cache is **NOT automatically updated** when you change the token's name or symbol on-chain. Only the contract owner can update this information by verifying address ownership and submitting an update request.
+
 ## Useful Links
 
 - [Sepolia Faucet](https://sepoliafaucet.com/)

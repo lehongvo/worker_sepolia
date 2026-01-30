@@ -10,7 +10,12 @@
     "clean": "hardhat clean",
     "deploy:local": "hardhat run scripts/deploy.js",
     "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
-    "upgrade:token": "hardhat run scripts/upgradeNameSymbol.js --network sepolia"
+    "upgrade:token": "hardhat run scripts/upgradeNameSymbol.js --network sepolia",
+    "verify:token": "hardhat run scripts/verifyTokenInfo.js --network sepolia",
+    "update:links": "node scripts/openUpdateLinks.js",
+    "deploy:nft:local": "hardhat run scripts/deployNft.js",
+    "deploy:nft:sepolia": "hardhat run scripts/deployNft.js --network sepolia",
+    "upgrade:nft": "hardhat run scripts/upgradeNft.js --network sepolia"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
