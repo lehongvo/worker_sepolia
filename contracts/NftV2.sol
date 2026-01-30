@@ -57,6 +57,17 @@ contract TestNftV2 is Initializable, ERC721Upgradeable, ERC721URIStorageUpgradea
         $._baseTokenURI = baseURI_;
     }
 
+    /**
+     * @dev Initialize V2 storage variables after upgrade from V1
+     * This function should be called immediately after upgrading to V2
+     * It copies the current name/symbol from the parent contract to the custom storage
+     */
+    function initializeV2() public reinitializer(2) {
+        // Copy current name and symbol from parent contract to custom storage
+        _customName = super.name();
+        _customSymbol = super.symbol();
+    }
+
     // ============ MINTING FUNCTIONS ============
 
     /**

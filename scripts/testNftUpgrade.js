@@ -86,6 +86,11 @@ async function main() {
   console.log("  Implementation V1:", implV1);
   console.log("  Implementation V2:", implV2);
 
+  // Initialize V2 storage
+  console.log("\nInitializing V2 storage...");
+  await nftV2.initializeV2();
+  console.log("  ✅ V2 storage initialized");
+
   // ==================== PHASE 3: UPDATE COLLECTION INFO ====================
   console.log("\n═══════════════════════════════════════════════════════════════");
   console.log("PHASE 3: Update Collection Info");

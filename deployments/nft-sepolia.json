@@ -1,0 +1,13 @@
+{
+  "network": "sepolia",
+  "contractType": "NFT",
+  "proxyAddress": "0xeb9dF8D9a271600E38a55c584E44f5294e93d97b",
+  "implementationAddress": "0x4cb1073C019312Eb602a36FefbF0af9B4fb33fFE",
+  "adminAddress": "0xe1e4800Dc1152310574ab1F7279f6b4c1eaBb392",
+  "deployer": "0x0ef303a549722d0DDe364c430512E10C907cD510",
+  "nftName": "TestNFT",
+  "nftSymbol": "TNFT",
+  "baseURI": "https://api.example.com/metadata/",
+  "deployedAt": "2026-01-30T10:01:39.677Z",
+  "version": "1.0.0"
+}

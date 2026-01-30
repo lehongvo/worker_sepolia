@@ -82,6 +82,23 @@ async function main() {
   const implementationAddress = await upgrades.erc1967.getImplementationAddress(upgradedAddress);
   console.log("New Implementation Address:", implementationAddress);
 
+  // Initialize V2 storage variables
+  console.log("\n=== Initializing V2 Storage ===");
+  try {
+    console.log("Calling initializeV2() to set up custom name/symbol storage...");
+    const initTx = await upgradedNft.initializeV2();
+    console.log("Transaction hash:", initTx.hash);
+    await initTx.wait();
+    console.log("✅ V2 storage initialized!");
+  } catch (error) {
+    if (error.message.includes("already initialized")) {
+      console.log("✓ V2 storage already initialized");
+    } else {
+      console.log("❌ Error initializing V2:", error.message);
+      console.log("Continuing anyway...");
+    }
+  }
+
   // Check if we need to update name/symbol
   const shouldUpdateInfo = (newName !== deploymentInfo.nftName) || (newSymbol !== deploymentInfo.nftSymbol);
   

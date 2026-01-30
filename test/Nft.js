@@ -118,6 +118,9 @@ describe("TestNftV2", function () {
     TestNftV2 = await ethers.getContractFactory("TestNftV2");
     nftV2 = await upgrades.upgradeProxy(await nft.getAddress(), TestNftV2);
     await nftV2.waitForDeployment();
+    
+    // Initialize V2 storage
+    await nftV2.initializeV2();
   });
 
   describe("Upgrade", function () {
