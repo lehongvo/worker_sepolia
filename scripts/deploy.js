@@ -53,6 +53,32 @@ async function main() {
   console.log("Total Supply:", hre.ethers.formatEther(totalSupply), symbol);
   console.log("Deployer Balance:", hre.ethers.formatEther(balance), symbol);
 
+  // Save deployment info to JSON file
+  const fs = require("fs");
+  const path = require("path");
+  
+  const deploymentInfo = {
+    network: network,
+    proxyAddress: proxyAddress,
+    implementationAddress: implementationAddress,
+    adminAddress: adminAddress,
+    deployer: deployer.address,
+    tokenName: name,
+    tokenSymbol: symbol,
+    initialSupply: hre.ethers.formatEther(totalSupply),
+    deployedAt: new Date().toISOString(),
+    version: "1.0.0"
+  };
+
+  const deploymentsDir = path.join(__dirname, "..", "deployments");
+  if (!fs.existsSync(deploymentsDir)) {
+    fs.mkdirSync(deploymentsDir, { recursive: true });
+  }
+
+  const deploymentFile = path.join(deploymentsDir, `${network}.json`);
+  fs.writeFileSync(deploymentFile, JSON.stringify(deploymentInfo, null, 2));
+  console.log(`\n💾 Deployment info saved to: deployments/${network}.json`);
+
   // Verify contracts on Etherscan (only if not on localhost/hardhat network)
   const network = hre.network.name;
   if (network !== "hardhat" && network !== "localhost") {

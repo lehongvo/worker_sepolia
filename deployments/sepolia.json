@@ -1,0 +1,12 @@
+{
+  "network": "sepolia",
+  "proxyAddress": "0x3190A561931Aa6D7Bf70F1cBBfE7731EC081724a",
+  "implementationAddress": "0x5965AF40678Ed0a8e9B7103a8AaB0D496f08Fd55",
+  "adminAddress": "0x09902cEf9ef4b7f4865aDEfEa7a2F68074018C75",
+  "deployer": "0x0ef303a549722d0DDe364c430512E10C907cD510",
+  "tokenName": "testToken",
+  "tokenSymbol": "MTK",
+  "initialSupply": "1000000000.0",
+  "deployedAt": "2026-01-30T15:50:00.000Z",
+  "version": "1.0.0"
+}

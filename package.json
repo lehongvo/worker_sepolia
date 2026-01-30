@@ -9,7 +9,8 @@
     "test": "hardhat test",
     "clean": "hardhat clean",
     "deploy:local": "hardhat run scripts/deploy.js",
-    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia"
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "upgrade:token": "hardhat run scripts/upgradeNameSymbol.js --network sepolia"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",

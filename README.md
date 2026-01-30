@@ -119,10 +119,14 @@ The `TestToken` contract is an upgradeable ERC20 token with the following featur
 ```
 lotus_test_proxy/
 ├── contracts/
-│   └── Token.sol              # Upgradeable ERC20 Token
+│   ├── Token.sol              # V1 Upgradeable ERC20 Token
+│   └── TokenV2.sol            # V2 with name/symbol update
 ├── scripts/
-│   ├── deploy.js              # Deploy + Verify script
+│   ├── deploy.js              # Deploy + Verify + Save JSON
+│   ├── upgradeNameSymbol.js   # Upgrade to V2 + Update info
 │   └── check-config.js        # Configuration checker
+├── deployments/
+│   └── sepolia.json           # Deployment info (auto-generated)
 ├── test/
 │   └── Token.js               # Token contract tests
 ├── .env                       # Environment variables (gitignored)
@@ -130,6 +134,8 @@ lotus_test_proxy/
 ├── hardhat.config.js          # Hardhat configuration + Networks
 ├── package.json               # Dependencies + Scripts
 ├── QUICKSTART.md              # Quick start guide
+├── UPGRADE_GUIDE.md           # Upgrade instructions
+├── GIT_GUIDE.md               # Git setup guide
 └── README.md                  # This file
 ```
 
@@ -175,17 +181,35 @@ yarn compile         # Compile contracts
 yarn test            # Run tests
 yarn deploy:local    # Deploy to localhost
 yarn deploy:sepolia  # Deploy to Sepolia + verify
+yarn upgrade:token   # Upgrade to V2 + update name/symbol
 yarn clean           # Clean cache and artifacts
 ```
 
 ## Upgrade Contract
 
-To upgrade the contract later:
+### Upgrade to V2 with Name/Symbol Update
+
+TokenV2 adds the ability to update token name and symbol:
+
+```bash
+# Upgrade and update name/symbol
+yarn upgrade:token <PROXY_ADDRESS> "New Name" "NEW"
+
+# Or use values from .env
+yarn upgrade:token <PROXY_ADDRESS>
+```
+
+See [UPGRADE_GUIDE.md](./UPGRADE_GUIDE.md) for detailed upgrade instructions.
+
+### Manual Upgrade (Advanced)
 
 ```javascript
 const TestTokenV2 = await ethers.getContractFactory("TestTokenV2");
 const upgraded = await upgrades.upgradeProxy(proxyAddress, TestTokenV2);
 console.log("Upgraded to:", await upgraded.getAddress());
+
+// Update name and symbol
+await upgraded.updateTokenInfo("New Name", "NEW");
 ```
 
 ## Manual Verification (if needed)

@@ -28,6 +28,9 @@ ignition/deployments/chain-31337
 .openzeppelin/*.json
 !.openzeppelin/*.md
 
+# Deployment files (optional - uncomment to ignore)
+# deployments/*.json
+
 # Build files
 dist
 build
