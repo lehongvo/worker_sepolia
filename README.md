@@ -1,29 +1,29 @@
 # Lotus Test Proxy - Hardhat Project
 
-Dự án Hardhat với upgradeable ERC20 Token contract sử dụng OpenZeppelin.
+Hardhat project with upgradeable ERC20 Token contract using OpenZeppelin.
 
-## Yêu cầu
+## Requirements
 
-- Node.js v22.x (sử dụng nvm)
+- Node.js v22.x (using nvm)
 - Yarn v1.22.x
-- Sepolia testnet ETH (lấy từ [faucet](https://sepoliafaucet.com/))
+- Sepolia testnet ETH (get from [faucet](https://sepoliafaucet.com/))
 
-## Cài đặt
+## Installation
 
 ```bash
-# Sử dụng Node.js 22
+# Use Node.js 22
 nvm use 22
 
-# Cài đặt dependencies
+# Install dependencies
 yarn install
 
-# Copy file .env.example và điền thông tin
+# Copy .env.example and fill in your details
 cp .env.example .env
 ```
 
-## Cấu hình Environment Variables
+## Environment Variables Configuration
 
-Tạo file `.env` và điền các thông tin sau:
+Create a `.env` file and fill in the following information:
 
 ```env
 # Token Configuration
@@ -34,22 +34,22 @@ TOKEN_SYMBOL=YTK
 PRIVATE_KEY=your_private_key_here
 SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_KEY
 
-# Etherscan API Key (để verify contract)
+# Etherscan API Key (for contract verification)
 ETHERSCAN_API_KEY=your_etherscan_api_key
 ```
 
-### Lấy thông tin cần thiết:
+### How to get the required information:
 
-1. **Private Key**: Export từ MetaMask (Settings > Security & Privacy > Show Private Key)
+1. **Private Key**: Export from MetaMask (Settings > Security & Privacy > Show Private Key)
 2. **Sepolia RPC URL**: 
-   - Tạo app miễn phí tại [Alchemy](https://www.alchemy.com/) hoặc [Infura](https://infura.io/)
-   - Copy Sepolia RPC endpoint
-3. **Etherscan API Key**: Đăng ký miễn phí tại [Etherscan](https://etherscan.io/myapikey)
+   - Create a free app at [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/)
+   - Copy the Sepolia RPC endpoint
+3. **Etherscan API Key**: Sign up for free at [Etherscan](https://etherscan.io/myapikey)
 
-## Các lệnh cơ bản
+## Basic Commands
 
 ```bash
-# Kiểm tra cấu hình .env
+# Check .env configuration
 yarn check
 
 # Compile contracts
@@ -58,17 +58,17 @@ yarn compile
 # Run tests
 yarn test
 
-# Deploy lên Localhost (testing)
+# Deploy to Localhost (testing)
 yarn deploy:local
 
-# Deploy lên Sepolia (tự động verify)
+# Deploy to Sepolia (auto-verify)
 yarn deploy:sepolia
 
-# Clean artifacts và cache
+# Clean artifacts and cache
 yarn clean
 ```
 
-### Hoặc dùng npx:
+### Or use npx:
 
 ```bash
 npx hardhat compile
@@ -78,57 +78,59 @@ npx hardhat run scripts/deploy.js --network sepolia
 npx hardhat clean
 ```
 
-## Deploy lên Sepolia
+## Deploy to Sepolia
 
 ```bash
-# 1. Kiểm tra cấu hình trước
+# 1. Check configuration first
 yarn check
 
-# 2. Đảm bảo đã có SepoliaETH trong wallet
-# 3. Chạy lệnh deploy:
+# 2. Make sure you have SepoliaETH in your wallet
+# 3. Run deploy command:
 yarn deploy:sepolia
 
-# Hoặc dùng npx:
+# Or use npx:
 npx hardhat run scripts/deploy.js --network sepolia
 ```
 
-Deploy script sẽ tự động:
-- ✅ Deploy Proxy và Implementation contracts
-- ✅ Initialize token với name và symbol từ .env
-- ✅ Verify contracts trên Etherscan
-- ✅ Hiển thị các địa chỉ contract và links
+The deploy script will automatically:
+- ✅ Deploy Proxy and Implementation contracts
+- ✅ Initialize token with name and symbol from .env
+- ✅ Verify contracts on Etherscan
+- ✅ Display contract addresses and links
 
 ## Smart Contract: TestToken
 
-Contract `TestToken` là một upgradeable ERC20 token với các tính năng:
+The `TestToken` contract is an upgradeable ERC20 token with the following features:
 
-### Đặc điểm chính:
-- ✅ **Upgradeable**: Sử dụng OpenZeppelin Upgrades plugin
-- ✅ **ERC20 Standard**: Token chuẩn với name/symbol từ .env
-- ✅ **Ownable**: Chỉ owner mới có quyền mint tokens
-- ✅ **Initial Supply**: 1 tỷ tokens được mint khi khởi tạo
-- ✅ **Proxy Pattern**: Deploy qua TransparentUpgradeableProxy
+### Key Features:
+- ✅ **Upgradeable**: Uses OpenZeppelin Upgrades plugin
+- ✅ **ERC20 Standard**: Standard token with name/symbol from .env
+- ✅ **Ownable**: Only owner can mint tokens
+- ✅ **Initial Supply**: 1 billion tokens minted on initialization
+- ✅ **Proxy Pattern**: Deployed via TransparentUpgradeableProxy
 
 ### Functions:
-- `initialize(name, symbol, recipient, owner)` - Khởi tạo token (chỉ gọi 1 lần)
-- `mint(to, amount)` - Mint thêm tokens (onlyOwner)
+- `initialize(name, symbol, recipient, owner)` - Initialize token (can only be called once)
+- `mint(to, amount)` - Mint additional tokens (onlyOwner)
 - Standard ERC20: `transfer`, `balanceOf`, `approve`, `transferFrom`, etc.
 
-## Cấu trúc thư mục
+## Project Structure
 
 ```
 lotus_test_proxy/
 ├── contracts/
 │   └── Token.sol              # Upgradeable ERC20 Token
 ├── scripts/
-│   └── deploy.js              # Deploy + Verify script
+│   ├── deploy.js              # Deploy + Verify script
+│   └── check-config.js        # Configuration checker
 ├── test/
-│   └── Token.js               # Tests cho Token contract
+│   └── Token.js               # Token contract tests
 ├── .env                       # Environment variables (gitignored)
-├── .env.example               # Template cho .env
-├── hardhat.config.js          # Cấu hình Hardhat + Networks
-├── package.json               # Dependencies
-└── README.md                  # File này
+├── .env.example               # Template for .env
+├── hardhat.config.js          # Hardhat configuration + Networks
+├── package.json               # Dependencies + Scripts
+├── QUICKSTART.md              # Quick start guide
+└── README.md                  # This file
 ```
 
 ## Deploy Output Example
@@ -151,17 +153,34 @@ Symbol: MTK
 Total Supply: 1000000000.0 MTK
 
 === Verifying Contracts on Etherscan ===
+Waiting for block confirmations...
+
+Verifying Implementation...
 ✅ Implementation verified!
+
+Verifying Proxy...
 ✅ Proxy verified!
 
+=== Verification Complete ===
 View on Etherscan:
 Proxy: https://sepolia.etherscan.io/address/0x1234...
 Implementation: https://sepolia.etherscan.io/address/0x5678...
 ```
 
+## Yarn Scripts
+
+```bash
+yarn check           # Check .env configuration
+yarn compile         # Compile contracts
+yarn test            # Run tests
+yarn deploy:local    # Deploy to localhost
+yarn deploy:sepolia  # Deploy to Sepolia + verify
+yarn clean           # Clean cache and artifacts
+```
+
 ## Upgrade Contract
 
-Để upgrade contract sau này:
+To upgrade the contract later:
 
 ```javascript
 const TestTokenV2 = await ethers.getContractFactory("TestTokenV2");
@@ -169,17 +188,17 @@ const upgraded = await upgrades.upgradeProxy(proxyAddress, TestTokenV2);
 console.log("Upgraded to:", await upgraded.getAddress());
 ```
 
-## Verify Contract thủ công (nếu cần)
+## Manual Verification (if needed)
 
 ```bash
 # Verify Implementation
 npx hardhat verify --network sepolia IMPLEMENTATION_ADDRESS
 
-# Verify Proxy (thường tự động)
+# Verify Proxy (usually automatic)
 npx hardhat verify --network sepolia PROXY_ADDRESS
 ```
 
-## Công nghệ sử dụng
+## Technology Stack
 
 - Hardhat v2.28.4
 - Solidity ^0.8.28
@@ -187,32 +206,48 @@ npx hardhat verify --network sepolia PROXY_ADDRESS
 - OpenZeppelin Contracts v5.4.0
 - OpenZeppelin Contracts Upgradeable v5.4.0
 - OpenZeppelin Hardhat Upgrades v3.9.1
-- Hardhat Verify v3.0.8
+- Hardhat Verify v2.1.3
 - dotenv v17.2.3
 
 ## Security Notes
 
-- ⚠️ **KHÔNG** commit file `.env` lên git
-- ⚠️ **KHÔNG** share private key với ai
-- Constructor có `_disableInitializers()` để ngăn implementation contract bị khởi tạo
-- Sử dụng `initializer` modifier để đảm bảo initialize chỉ gọi 1 lần
-- Owner có quyền mint unlimited tokens - cần thận trọng trong production
+- ⚠️ **DO NOT** commit the `.env` file to git
+- ⚠️ **DO NOT** share your private key with anyone
+- Constructor has `_disableInitializers()` to prevent implementation contract initialization
+- Uses `initializer` modifier to ensure initialize is only called once
+- Owner has permission to mint unlimited tokens - use caution in production
 
 ## Troubleshooting
 
-**Lỗi: "insufficient funds for intrinsic transaction cost"**
-- Cần thêm SepoliaETH vào wallet từ faucet
+**Error: "insufficient funds for intrinsic transaction cost"**
+- Need to add SepoliaETH to wallet from faucet
 
-**Lỗi: "Invalid API Key"**
-- Kiểm tra ETHERSCAN_API_KEY trong file .env
+**Error: "Invalid API Key"**
+- Check ETHERSCAN_API_KEY in .env file
 
-**Lỗi: "Already Verified"**
-- Contract đã được verify rồi, không cần verify lại
+**Error: "Already Verified"**
+- Contract is already verified, no need to verify again
 
-## Links hữu ích
+**Error: Verification failed**
+- Wait a few more blocks and try manual verification
+- Make sure ETHERSCAN_API_KEY is correct
+
+## Useful Links
 
 - [Sepolia Faucet](https://sepoliafaucet.com/)
 - [Alchemy Dashboard](https://dashboard.alchemy.com/)
 - [Etherscan Sepolia](https://sepolia.etherscan.io/)
 - [OpenZeppelin Docs](https://docs.openzeppelin.com/)
-# worker_sepolia
+- [Hardhat Docs](https://hardhat.org/docs)
+
+## Support
+
+For issues or questions:
+1. Check the QUICKSTART.md for quick reference
+2. Review error messages carefully
+3. Ensure all environment variables are set correctly
+4. Verify you have enough SepoliaETH for deployment
+
+## License
+
+MIT
